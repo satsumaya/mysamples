@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="WpfUserControlsApp1.NumericUpDown"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WpfUserControlsApp1"
+             mc:Ignorable="d"
+             d:DesignHeight="100" d:DesignWidth="287">
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="PositiveNegative">
+                <VisualState x:Name="Positive" />
+                <VisualState x:Name="Negative">
+                    <Storyboard>
+                        <ColorAnimation
+                            Storyboard.TargetName="textBlockValue"
+                            Storyboard.TargetProperty="Foreground.Color"
+                            To="Red" />
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <!--
+        VisualStateManagerは、見た目の状態を管理する機能です。
+        StyleのTriggerなどでIsMouseOverがTrueの時にアニメーションを実行するといったことが可能でしたが、
+        VisualStateManagerは、状態に名前を付けて管理することが出来る点が異なります。
+        
+        状態の遷移はプログラムから行うので、Triggerに比べてより複雑な条件を指定することが出来ます。
+
+        VisualStateManagerは、VisualStateManagerクラスのVisualStateGroups添付プロパティで
+        コントロールに対して設定します。
+        
+        VisualStateGroups添付プロパティには、x:Nameで名前を付けたVisualStateGroupを設定します。
+        VisualStateGroupの中には、x:Nameで名前をつけたVisualStateが定義できます。
+        このVisualStateの中にStoryboardを設定してアニメーションを定義します。
+        VisualStateGroupの役割ですが、同一のVisualStateGroup内のVisualStateは同時に1つしかアクティブになれないという制約があります。
+        逆にいうと、異なる意味を持つVisualStateを別のVisualStateGroupに置くことで、
+        同時に複数のVisualStateを有効にするといったことが可能になっています。
+
+        ここでは、Valueの値がマイナスのときだけValueの値を赤色にするVisualStateを定義したいと思います。
+        VisualStateGroupの名前をNegativePositiveにして、
+        その中にNegativeとPositiveというVisualStateを定義します。
+        
+        NegativeのVisualState内には、TextBlockの値を赤色にするアニメーションを定義しています。
+        コードビハインドで、VisualStateの切り替え処理を書きます。
+        
+        BlendでのVisualStateManagerの設定方法
+        VisualStateManagerは、複雑になると手書きするのが大変になってくるため
+        Blendを使って作成するのが一般的です。
+        
+        Blendの状態タブを開くとベース（基本）という状態がデフォルトで選択されていて、
+        その下にVisualStateGroupとVisualStateを定義できるようになっています。
+        VisualStateを選択すると、
+        通常のアニメーション作成と同じ要領で切り替え時の動作を設定できます。
+        -->
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <RepeatButton Content="Up" Grid.Column="1" Margin="2.5" Click="UpButton_Click" />
+        <RepeatButton Content="Down" Grid.Column="1" Grid.Row="1" Margin="2.5" Click="DownButton_Click" />
+        <TextBlock x:Name="textBlockValue" Grid.RowSpan="2" TextWrapping="Wrap"
+                   Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NumericUpDown}}}"
+                   HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" Foreground="Black" />
+        <!--画面のTextBlockのTextプロパティとValueプロパティをバインドします。今回は、
+        BindingのRelativeSourceというものを使ってBindingの元になるオブジェクトを、
+        コントロールのツリーを親へ親へ辿っていって
+        NumericUpDownコントロールに行きあたるまで探索するように指定しています（FindAncestor）。
+        -->
+    </Grid>
+</UserControl>

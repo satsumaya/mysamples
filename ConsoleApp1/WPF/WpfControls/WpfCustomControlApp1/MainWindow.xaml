@@ -1,0 +1,31 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfCustomControlApp1"
+        xmlns:WpfUserControlsApp1="clr-namespace:WpfUserControlsApp1;assembly=WpfUserControlsApp1" x:Class="WpfCustomControlApp1.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <!-- 通常の見た目 -->
+        <local:CNumericUpDown />
+        <!-- コントロールテンプレートの差し替え -->
+        <local:CNumericUpDown>
+            <local:CNumericUpDown.Template>
+                <ControlTemplate TargetType="{x:Type local:CNumericUpDown}">
+                    <StackPanel>
+                        <RepeatButton x:Name="PART_UpButton" Content="Up" />
+                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType={x:Type local:CNumericUpDown}}}"
+                                   HorizontalAlignment="Center" />
+                        <RepeatButton x:Name="PART_DownButton" Content="Down" />
+                    </StackPanel>
+                </ControlTemplate>
+            </local:CNumericUpDown.Template>
+        </local:CNumericUpDown>
+        <WpfUserControlsApp1:NumericUpDown MouseDoubleClick="NumericUpDown_MouseDoubleClick" />
+        <local:ToggleControl IsEnabled="False" />
+        <local:ToggleControl />
+        <ToggleButton Height="100" />
+    </StackPanel>
+</Window>

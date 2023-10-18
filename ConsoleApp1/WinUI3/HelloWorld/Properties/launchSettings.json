@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "HelloWorld (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "HelloWorld (Unpackaged)": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}

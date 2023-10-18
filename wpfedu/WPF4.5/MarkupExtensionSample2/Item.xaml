@@ -1,0 +1,2 @@
+﻿<Item xmlns="clr-namespace:MarkupExtensionSample2;assembly=MarkupExtensionSample2"
+      Id="{IdProvider Prefix=item-}" />

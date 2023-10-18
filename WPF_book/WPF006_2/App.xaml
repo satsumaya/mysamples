@@ -1,0 +1,10 @@
+﻿<Application x:Class="WPF006_2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WPF006_2"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <SolidColorBrush x:Key="backColor" Color="Orange"/>
+
+    </Application.Resources>
+</Application>
